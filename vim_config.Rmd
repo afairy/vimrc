@@ -1,0 +1,28 @@
+---
+title: "Vim config"
+output: html_notebook
+---
+
+```{r}
+plugins <- c('https://github.com/wincent/command-t.git',
+  'https://github.com/altercation/vim-colors-solarized.git',
+  'https://github.com/tpope/vim-fugitive.git',
+  'https://github.com/sjl/vitality.vim.git'
+)
+
+clone_or_pull <- function(url, path) {
+    if (file.exists(path)) {
+        git2r::pull(git2r::repository(path))
+    } else {
+        git2r::clone(url = url, local_path = path)
+    }
+}
+
+to_plugin_path <- function(url) {
+    file.path(path.expand("~"), ifelse(.Platform$OS.type == "windows", "_vim", ".vim"), "pack", "foo", "start", sub("^([^.]*).*", "\\1", basename(url)))
+}
+
+mapply(clone_or_pull, plugins, lapply(plugins, to_plugin_path))
+```
+
+
