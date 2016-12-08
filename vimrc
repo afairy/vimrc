@@ -20,6 +20,7 @@ nnoremap <leader><cr> o<esc>
 nnoremap <leader>, :wa<cr>:silent make<cr>:redraw!<cr>
 map L $
 map H 0
+map Y y$
 
 set linespace=2
 set encoding=utf-8
